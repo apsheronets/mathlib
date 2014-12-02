@@ -3,8 +3,11 @@ SOURCES=genops.mli genops.ml numref.mli numref.ml math.mli math.ml constant.mli 
         mersenne.mli mersenne.ml rand.mli rand.ml vector.mli vector.ml stubs.c
 RESULT=mathlib
 
-export NO_CUSTOM=1
 
+# If on a system without dynamic linking (Such as Mac OS X), comment this out
+export NO_CUSTOM=1
+# and uncomment this
+# STATIC=1
 
 
 ML_SOURCES=$(filter %.ml, $(SOURCES))
