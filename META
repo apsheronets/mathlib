@@ -1,0 +1,5 @@
+requires = ""
+description = "Math-related modules"
+archive(byte) = "mathlib.cma"
+archive(native) = "mathlib.cmxa"
+version = "0.11.1"

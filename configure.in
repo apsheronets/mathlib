@@ -1,0 +1,157 @@
+AC_INIT(math.mli)
+AC_PROG_CC
+AC_PROG_RANLIB
+AC_CHECK_PROG(OPTLIB, ocamlopt, opt)
+AC_HEADER_STDC
+AC_CHECK_LIB(m, pow)
+
+function def_fun1() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x) { return copy_double(${name}(Double_val(x))); }
+EOF
+}
+
+function undef_fun1() {
+	cat <<EOF >> stubs.c
+double ${name}(double x) { failwith("${name} unimplemented"); return 0; }
+value ml_${name}(value x) { failwith("${name} unimplemented"); return Val_unit; }
+EOF
+}
+
+function def_fun2() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x, value y) {
+	return copy_double(${name}(Double_val(x), Double_val(y)));
+}
+EOF
+}
+
+function undef_fun2() {
+	cat <<EOF >> stubs.c
+double ${name}(double x, double y) {
+	failwith("${name} unimplemented"); return 0;
+}
+value ml_${name}(value x, value y) {
+	failwith("${name} unimplemented");
+	return Val_unit;
+}
+EOF
+}
+
+function def_fun3() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x, value y, value z) {
+	return copy_double(${name}(Double_val(x), Double_val(y), Double_val(z)));
+}
+EOF
+}
+
+function undef_fun3() {
+	cat <<EOF >> stubs.c
+double ${name}(double x, double y, double x) {
+	failwith("${name} unimplemented"); return 0;
+}
+value ml_${name}(value x, value y, value z) {
+	failwith("${name} unimplemented");
+	return Val_unit;
+}
+EOF
+}
+
+function def_funfif() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x, value y) {
+	return copy_double(${name}(Double_val(x), Int_val(y)));
+}
+EOF
+}
+
+function undef_funfif() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x, value y) {
+	failwith("${name} unimplemented");
+	return Val_unit;
+}
+EOF
+}
+
+function def_funfi() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x) {
+	return Int_val(${name}(Double_val(x)));
+}
+EOF
+}
+
+function undef_funfi() {
+	cat <<EOF >> stubs.c
+value ml_${name}(value x, value y) {
+	failwith("${name} unimplemented");
+	return Val_unit;
+}
+EOF
+}
+
+
+cat <<EOH > stubs.c
+#include <math.h>
+#include <caml/fail.h>
+#include <caml/alloc.h>
+EOH
+
+name="fma"
+AC_CHECK_FUNC(fma, def_fun3, undef_fun3)
+name="fdim"
+AC_CHECK_FUNC(fdim, def_fun2, undef_fun2)
+name="nextafter"
+AC_CHECK_FUNC(nextafter, def_fun2, undef_fun2)
+name="remainder"
+AC_CHECK_FUNC(remainder, def_fun2, undef_fun2)
+name="trunc"
+AC_CHECK_FUNC(trunc, def_fun1, undef_fun1)
+name="round"
+AC_CHECK_FUNC(round, def_fun1, undef_fun1)
+name="nearbyint"
+AC_CHECK_FUNC(nearbyint, def_fun1, undef_fun1)
+name="tgamma"
+AC_CHECK_FUNC(tgamma, def_fun1, undef_fun1)
+name="lgamma"
+AC_CHECK_FUNC(lgamma, def_fun1, undef_fun1)
+name="erfc"
+AC_CHECK_FUNC(erfc, def_fun1, undef_fun1)
+name="erf"
+AC_CHECK_FUNC(erf, def_fun1, undef_fun1)
+name="hypot"
+AC_CHECK_FUNC(hypot, def_fun2, undef_fun2)
+name="cbrt"
+AC_CHECK_FUNC(cbrt, def_fun1, undef_fun1)
+name="logb"
+AC_CHECK_FUNC(logb, def_fun1, undef_fun1)
+name="log2"
+AC_CHECK_FUNC(log2, def_fun1, undef_fun1)
+name="log1p"
+AC_CHECK_FUNC(log1p, def_fun1, undef_fun1)
+name="expm1"
+AC_CHECK_FUNC(expm1, def_fun1, undef_fun1)
+name="exp2"
+AC_CHECK_FUNC(exp2, def_fun1, undef_fun1)
+name="atanh"
+AC_CHECK_FUNC(atanh, def_fun1, undef_fun1)
+name="asinh"
+AC_CHECK_FUNC(asinh, def_fun1, undef_fun1)
+name="acosh"
+AC_CHECK_FUNC(acosh, def_fun1, undef_fun1)
+name="scalbn"
+AC_CHECK_FUNC(scalbn, def_funfif, undef_funfif)
+name="ilogb"
+AC_CHECK_FUNC(ilogb, def_funfi, undef_funfi)
+name="j0"
+AC_CHECK_FUNC(j0, def_fun1, undef_fun1)
+name="j1"
+AC_CHECK_FUNC(j1, def_fun1, undef_fun1)
+name="y0"
+AC_CHECK_FUNC(y0, def_fun1, undef_fun1)
+name="y1"
+AC_CHECK_FUNC(y1, def_fun1, undef_fun1)
+
+AC_OUTPUT(Makefile)

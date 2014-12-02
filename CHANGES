@@ -1,0 +1,27 @@
+0.11.1: 2/22/2006
+      * build updates
+
+0.11.0: 4/18/2004
+      * New functions
+         * Vector: cross_product
+         * Math: fraction
+      * New module Numref
+
+0.10.0: 2/27/2004
+       * New module Vector
+       * New functions
+         * Complexer: log10
+       * New tests for the Complexer module revealed a few bugs in the trig
+	  functions.
+       * Better support for building on systems without the native-code compiler 
+          or dynamic linking support.
+
+0.9.0: 11/16/2003
+	* Updated the Mersenne Twister implementation to use ocaml 3.07 literal
+          int32s. Now requires 3.07.
+
+0.8.1: 7/13/2003
+	* I have no idea how I missed seeing Pervasives.exp
+
+0.8.0: 7/7/2003
+	* Initial release in this incarnation

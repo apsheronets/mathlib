@@ -1,0 +1,28 @@
+Math & Numeric Library for Ocaml
+
+Math and float-format related stuff missing from the standard library,
+plus random number distributions, functors for writing algorithms that
+don't depend on a certain integer type, and more. Most of this used to
+be part of my now-defunct stew library. Not backards compatable for
+the most part.
+
+Complexer: Trig and other functions for complex numbers.
+Constant: Useful numeric constants like e and pi.
+Float: Functions for finding out information about floats.
+Genops: Type-independent math.
+Math: Missing math functions, taken mostly from the C99 library standard.
+Mersenne: The Mersenne Twister random number generator.
+Numops: C-style +=, -=, etc.
+Rand: Random number distributions.
+
+Requires:
+findlib
+
+Installation:
+% ./configure
+% make
+% make opt
+% make install
+
+
+Bugs, suggestions, comments, etc. can go to shawnw@speakeasy.org
