@@ -21,7 +21,6 @@ findlib
 Installation:
 % ./configure
 % make
-% make opt
 % make install
 
 

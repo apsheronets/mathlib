@@ -23,8 +23,7 @@ CFLAGS=-g -O2 -fPIC -DPIC
 
 OCAMLDOCFLAGS=-sort
 
-all: byte-code-library 
-opt: native-code-library
+all: byte-code-library native-code-library
 install: libinstall
 uninstall: libuninstall
 
